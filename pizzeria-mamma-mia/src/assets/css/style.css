@@ -1,0 +1,17 @@
+img{
+    width: 1.2rem;
+    margin-right: 5px;
+}
+
+.header__imagen{
+    background-image: url(../img/header.png);
+    background-attachment: fixed;
+    background-size: cover; 
+    opacity: .9;
+}
+
+.img_cart{
+    width: 10rem !important;
+    
+    
+}
