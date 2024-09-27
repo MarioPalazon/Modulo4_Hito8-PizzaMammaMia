@@ -13,24 +13,28 @@ const Navbar=()=>{
   const { total } = usePizzas();
   const { user,setUser,loggedOut } = useContext(UserContext);
 
-    useEffect(()=>{
-      const token = localStorage.getItem("token");
-      const fetchMe=async()=>{
-          const response = await  fetch("http://localhost:5000/api/auth/me", {
-              headers: {
-              Authorization: `Bearer ${token}`,
-              },
-          });
+  const fetchMe=async()=>{
+    const token = localStorage.getItem("token");
+    if(token){
+      const response = await  fetch("http://localhost:5000/api/auth/me", {
+        headers: {
+        Authorization: `Bearer ${token}`,
+        },
+      });
 
-          const result = await response.json();
-          if(result.email){
-            setUser(true);
-          }           
-      }
-      
-      fetchMe();
+      const result = await response.json();
+      if(result.email){
+        setUser(true);
+      }      
+    }
+  }
     
-    },[]);
+  useEffect(()=>{
+      (async()=>{
+        await fetchMe();
+      })();
+    },[])
+
 
   let token=user;
   //const total=separadorMiles(25000);
